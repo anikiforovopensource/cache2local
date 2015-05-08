@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+echo "Restoring Ivy cache..."
+
+cache="$HOME/.ivy2/cache"
+backup="$HOME/.ivy2/backup"
+local="$HOME/.ivy2/local"
+
+if [ -d "$backup" ]; then
+  rm -rf "$local"
+  rm -rf "$cache"
+  mv "$backup" "$cache"
+  echo "Done."
+else
+  echo "Backup not found, nothing to do."
+fi

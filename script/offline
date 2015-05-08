@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+echo "Copying Ivy cache as local repo..."
+
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cache="$HOME/.ivy2/cache"
+backup="$HOME/.ivy2/backup"
+local="$HOME/.ivy2/local"
+
+if [ -d "$backup" ]; then
+  echo "Found existing backup, aborting."
+else
+  rm -rf "$local"
+  mv "$cache" "$backup"
+  scala "$dir/offline.scala"
+  echo "Done."
+fi
